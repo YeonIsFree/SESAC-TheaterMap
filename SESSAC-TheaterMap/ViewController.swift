@@ -41,7 +41,7 @@ class ViewController: UIViewController {
         centerMapOnCampus()
         fillAllAnnotationsArray()
         showAllAnnotations()
-        checkDeviceLocationAuthorization()
+//        checkDeviceLocationAuthorization()
     }
     
     // MARK: - MapView Configuratin Methods
@@ -64,6 +64,13 @@ class ViewController: UIViewController {
         annotaion.coordinate = centerCoor
         annotaion.title = CampusCoor.location
         movieMapView.addAnnotation(annotaion)
+    }
+    
+    private func centerMapOnCurrentLocation(_ coor: CLLocationCoordinate2D?) {
+        if let coor {
+            let region = MKCoordinateRegion(center: coor, latitudinalMeters: 5000, longitudinalMeters: 5000)
+            movieMapView.setRegion(region, animated: true)
+        }
     }
     
     func showAllAnnotations() {
@@ -89,7 +96,8 @@ extension ViewController: CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        
+        centerMapOnCurrentLocation(locations.last?.coordinate)
+        locationManager.stopUpdatingLocation()
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
@@ -101,7 +109,7 @@ extension ViewController: CLLocationManagerDelegate {
     }
 }
 
-// MARK: - LocationAuthorization Methods
+// MARK: - Location Authorization Methods
 
 extension ViewController {
     
@@ -151,12 +159,19 @@ extension ViewController {
     func configureNagivationBar() {
         navigationItem.title = "영화보러가쟈"
         
-        let barButtonItem = UIBarButtonItem(title: "Filter", style: .plain, target: self, action: #selector(barButtonItemTapped))
-        navigationItem.rightBarButtonItem = barButtonItem
+        let rightBarButtonItem = UIBarButtonItem(title: "필터", style: .plain, target: self, action: #selector(filterButtonTapped))
+        navigationItem.leftBarButtonItem = rightBarButtonItem
+        
+        let leftBarButtonItem = UIBarButtonItem(title: "현재 위치", style: .plain, target: self, action: #selector(getCurrentLocation))
+        navigationItem.rightBarButtonItem = leftBarButtonItem
     }
     
-    @objc func barButtonItemTapped() {
+    @objc func filterButtonTapped() {
         fillterButtonAlert()
+    }
+    
+    @objc func getCurrentLocation() {
+        checkDeviceLocationAuthorization()
     }
 }
 

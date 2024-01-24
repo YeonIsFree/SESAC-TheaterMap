@@ -12,7 +12,7 @@ class ViewController: UIViewController {
     
     @IBOutlet var movieMapView: MKMapView!
     
-    private var theaterList: [Theater] = TheaterList().mapAnnotations
+    private var theaterList: [Theater] = TheaterList.mapAnnotations
     
     private var allAnnotations: [MKAnnotation] = []
     
@@ -41,7 +41,6 @@ class ViewController: UIViewController {
         centerMapOnCampus()
         fillAllAnnotationsArray()
         showAllAnnotations()
-        
         checkDeviceLocationAuthorization()
     }
     
@@ -52,19 +51,18 @@ class ViewController: UIViewController {
             let annotation = MKPointAnnotation()
             annotation.coordinate = CLLocationCoordinate2D(latitude: theater.latitude, longitude: theater.longitude)
             annotation.title = theater.location
-            
             allAnnotations.append(annotation)
         }
     }
     
-    func centerMapOnCampus() {
-        let centerCoor = CLLocationCoordinate2D(latitude: 37.6543906, longitude: 127.0498832)
+    private func centerMapOnCampus() {
+        let centerCoor = CampusCoor.centerCoor
         let region = MKCoordinateRegion(center: centerCoor, latitudinalMeters: 5000, longitudinalMeters: 5000)
         movieMapView.setRegion(region, animated: true)
         
         let annotaion = MKPointAnnotation()
         annotaion.coordinate = centerCoor
-        annotaion.title = "새싹 도봉캠퍼스"
+        annotaion.title = CampusCoor.location
         movieMapView.addAnnotation(annotaion)
     }
     
@@ -86,35 +84,32 @@ class ViewController: UIViewController {
 // MARK: - CLLocationManager Delegate
 
 extension ViewController: CLLocationManagerDelegate {
+    func configureLocationManager() {
+        locationManager.delegate = self
+    }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print(#function, #line, #file)
         centerMapOnCampus()
     }
     
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        print(#function, #line, #file)
         checkDeviceLocationAuthorization()
     }
 }
 
-// MARK: -
+// MARK: - LocationAuthorization Methods
 
 extension ViewController {
-    func configureLocationManager() {
-        locationManager.delegate = self
-    }
     
     // 사용자 "기기" 위치 서비스 활성화 여부 체크
     func checkDeviceLocationAuthorization() {
         
         DispatchQueue.global().async {
             if CLLocationManager.locationServicesEnabled() {
-//                print("위치 서비스 켜져있음")
                 let authorization: CLAuthorizationStatus
                 
                 if #available(iOS 14.0, *) {
@@ -126,7 +121,7 @@ extension ViewController {
                 DispatchQueue.main.async {
                     self.checkCurrentLocationAuthorization(status: authorization)
                 }
-                
+
             } else {
                 print("위치 서비스 꺼져있음")
             }
@@ -137,15 +132,12 @@ extension ViewController {
     func checkCurrentLocationAuthorization(status: CLAuthorizationStatus) {
         switch status {
         case .notDetermined:
-            print("최초 실행?")
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
             locationManager.requestWhenInUseAuthorization()
         case .denied:
-            print("거절됨")
             centerMapOnCampus()
             locationSettingAlert()
         case .authorizedWhenInUse:
-            print("한번만 실행")
             locationManager.startUpdatingLocation()
         default:
             print("ERROR")

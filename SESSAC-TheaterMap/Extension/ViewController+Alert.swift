@@ -29,18 +29,21 @@ extension ViewController {
     func fillterButtonAlert() {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
+        let allAction = UIAlertAction(title: Theaters.all.type, style: .default, handler: alertAction)
+        
         let megaBoxAction = UIAlertAction(title: Theaters.megabox.type, style: .default, handler: alertAction)
         
         let lotteAction = UIAlertAction(title: Theaters.lotteCinema.type, style: .default, handler: alertAction)
         
         let cgvAction = UIAlertAction(title: Theaters.cgv.type, style: .default, handler: alertAction)
         
-        let allAction = UIAlertAction(title: Theaters.all.type, style: .default, handler: alertAction)
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel)
         
+        alert.addAction(allAction)
         alert.addAction(megaBoxAction)
         alert.addAction(lotteAction)
         alert.addAction(cgvAction)
-        alert.addAction(allAction)
+        alert.addAction(cancelAction)
         
         present(alert, animated: true)
     }

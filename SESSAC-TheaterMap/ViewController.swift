@@ -22,11 +22,10 @@ class ViewController: UIViewController {
                 movieMapView.removeAnnotations(currentAnnotations)
             }
         }
-        didSet { // 바뀐 후: 새로운 데이터로 맵 갱신, 지도 중앙
+        didSet { // 바뀐 후: 새로운 데이터로 맵 갱신
             if let newAnnotations = displayedAnnotations {
                 movieMapView.addAnnotations(newAnnotations)
             }
-            centerMapOnCampus()
         }
     }
     

@@ -7,28 +7,26 @@
 
 import UIKit
 
-enum Theaters {
-    case megabox
-    case lotteCinema
-    case cgv
-    case all
-    
-    var type: String {
-        switch self {
-        case .megabox:
-            return "메가박스"
-        case .lotteCinema:
-            return "롯데시네마"
-        case .cgv:
-            return "CGV"
-        case .all:
-            return "전체보기"
-        }
-    }
-}
-
 extension ViewController {
-    func alert() {
+    
+    func locationSettingAlert() {
+        let alert = UIAlertController(title: "위치 정보 이용", message: "기기의 설정 > 개인정보 보호에서 위치 서비스를 켜주세요", preferredStyle: .alert)
+        let goAction = UIAlertAction(title: "이동", style: .default) { _ in
+            if let setting = URL(string: UIApplication.openSettingsURLString) {
+                UIApplication.shared.open(setting)
+            } else {
+                print("설정으로 가주세요")
+            }
+        }
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel)
+        
+        alert.addAction(goAction)
+        alert.addAction(cancelAction)
+        
+        present(alert, animated: true)
+    }
+    
+    func fillterButtonAlert() {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
         let megaBoxAction = UIAlertAction(title: Theaters.megabox.type, style: .default, handler: alertAction)

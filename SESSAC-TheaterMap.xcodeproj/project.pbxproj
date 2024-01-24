@@ -15,6 +15,7 @@
 		8C51A5182B60D6A600A9E373 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C51A5162B60D6A600A9E373 /* LaunchScreen.storyboard */; };
 		8C51A5212B60DB1A00A9E373 /* ViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C51A5202B60DB1A00A9E373 /* ViewController+Alert.swift */; };
 		8C51A5232B60DE0C00A9E373 /* TheaterData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C51A5222B60DE0C00A9E373 /* TheaterData.swift */; };
+		8C51A52D2B610DE600A9E373 /* TheaterList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C51A52C2B610DE600A9E373 /* TheaterList.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		8C51A5192B60D6A600A9E373 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8C51A5202B60DB1A00A9E373 /* ViewController+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+Alert.swift"; sourceTree = "<group>"; };
 		8C51A5222B60DE0C00A9E373 /* TheaterData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TheaterData.swift; sourceTree = "<group>"; };
+		8C51A52C2B610DE600A9E373 /* TheaterList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheaterList.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,9 +62,11 @@
 		8C51A50A2B60D6A500A9E373 /* SESSAC-TheaterMap */ = {
 			isa = PBXGroup;
 			children = (
+				8CDCE1F42B6139480085A55D /* Extension */,
 				8C51A51F2B60D6B600A9E373 /* Delegates */,
+				8C51A52B2B610DD800A9E373 /* Models */,
+				8C51A52A2B610DCC00A9E373 /* Data */,
 				8C51A50F2B60D6A500A9E373 /* ViewController.swift */,
-				8C51A5202B60DB1A00A9E373 /* ViewController+Alert.swift */,
 				8C51A5222B60DE0C00A9E373 /* TheaterData.swift */,
 				8C51A5112B60D6A500A9E373 /* Main.storyboard */,
 				8C51A5142B60D6A600A9E373 /* Assets.xcassets */,
@@ -79,6 +83,29 @@
 				8C51A50D2B60D6A500A9E373 /* SceneDelegate.swift */,
 			);
 			path = Delegates;
+			sourceTree = "<group>";
+		};
+		8C51A52A2B610DCC00A9E373 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				8C51A52C2B610DE600A9E373 /* TheaterList.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		8C51A52B2B610DD800A9E373 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		8CDCE1F42B6139480085A55D /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				8C51A5202B60DB1A00A9E373 /* ViewController+Alert.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -157,6 +184,7 @@
 				8C51A50C2B60D6A500A9E373 /* AppDelegate.swift in Sources */,
 				8C51A50E2B60D6A500A9E373 /* SceneDelegate.swift in Sources */,
 				8C51A5212B60DB1A00A9E373 /* ViewController+Alert.swift in Sources */,
+				8C51A52D2B610DE600A9E373 /* TheaterList.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
